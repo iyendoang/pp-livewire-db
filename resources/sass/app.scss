@@ -1,0 +1,245 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// Fontawesome
+@import '~@fortawesome/fontawesome-free/scss/brands';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+//menyembunyikan elemen sebelum diinisialisasi oleh alpine.js
+[x-cloak] {
+    display: none !important;
+}
+
+//-------- Wrapper -------------------------------
+//ketika sidebar belum dibuka
+.wrapper{
+    //menyembunyiakn sidebar di sebelah kiri negatif
+    .sidebar{
+        left: -250px;
+    }
+
+    //hilangkan padding kiri content 
+    .content{
+        padding-left: 0;
+    }
+}
+//ketika sidebar dibuka
+.wrapper.open{
+    //sidebar ditampilkan dengan left 0
+    .sidebar{
+        left: 0;
+    }
+
+    //padding konten menyesuaikan lebar sidebar
+    .content{
+        padding-left: 250px;
+    }
+}
+
+//-------- Header ----------------------------------
+.header{
+    .dropdown{
+        position: relative;
+        //style menu dropdown
+        .collapse{
+            height: 0;
+            overflow: hidden;
+            transition: 0.8s ease-in;
+            background: #ffffff;
+            border: 1px solid #cacaca;
+            border-radius: 5px;
+            box-shadow: 0 0 5px  rgba(0,0,0, 0.125);
+            margin: 0;
+            padding: 0;
+            padding-bottom: 10px;
+            //agar teks tidak mepet ke kiri
+            li{
+                padding-left: 15px;
+            }
+            //ubah wana default link
+            a, .nav-link{
+                color: #333232;
+            }
+        }
+        //saat menu dropdown ditampilkan
+        .collapse.show{
+            height: auto;
+        }
+        //atur jarak label dengan arrow
+        .label{
+            margin-right: 30px;
+        }
+        //atur jarak atas ikon (arrow)
+        i{
+            padding-top: 5px;
+        }
+
+        ul{
+            position: absolute;
+            width: 200px;
+            right: -20px;
+            top: 55px;
+        }
+    }
+    //atur lebar ikon
+    .icon{
+        width: 30px;
+    }
+}
+
+//-------- Sidebar ----------------------------
+.sidebar{
+    width: 250px;
+    position: fixed;
+    top: 0;
+    z-index: 1031;
+    height: 100%;
+    transition: 0.2s ease;
+    //hilangkan margin dan padding
+    .nav{
+        margin: 0;
+        padding: 0;
+    }
+    //atur lebar item
+    .nav-item{
+        padding: 0;
+        width: 100%;
+        //atur padding link
+        a{
+            padding: 15px;
+        }
+        //atur lebar ikon
+        .icon{
+            width: 30px;
+        }
+    }
+    
+    //atur item saat aktif
+    .nav-item.active .nav-link{
+        background: #000;
+        color: #fff;
+    }
+    
+    .dropdown{
+        //style menu dropdown pada sidebar
+        .collapse{
+            height: 0;
+            overflow: hidden;
+            transition: 0.8s ease-in;
+            background: $dark;
+            margin: 0;
+            padding: 0;
+            //agar teks tidak mepet
+            li{
+                padding-left: 15px;
+            }
+        }
+        //ubah warna default link
+        ul {
+            .nav-link{
+                color: #ddd;
+            }
+        }
+        //atur tinggi dropdown saat ditampilkan
+        .collapse.show{
+            height: auto;
+        }
+    }
+}
+
+.navbar{
+    //agar nabar lebih lebar
+    padding: 15px 15px;
+    //batasi tinggi logo
+    .navbar-brand img{
+        height: 25px;
+    }
+    //batasi logo di front end
+    .navbar-brand.front img{
+        height: 40px;
+    }
+}
+
+//-------- Konten -----------------------
+//menambahkan animasi transisi saat sidebar dibuka
+.content{
+    transition: 0.2s ease;
+}
+
+//Agar header tabel lebih lebar
+.table th{
+    padding: 15px 10px;
+}
+
+//Menghilangkan border radius dan menambahkan shadow pada card
+.card{
+    border-radius: 0;
+    box-shadow: 0 0 5px  rgba(0,0,0, 0.125);
+
+    .card-header:first-child {
+        border-radius: 0;
+    }
+}
+
+//-------- Mobile ---------
+@media (max-width: 767.98px) {
+    .wrapper.open{
+        .content{
+            padding-left: 0;
+        }
+    }
+    .navbar-brand{
+        width: 60%;
+    }
+}
+
+//----------------------- Front End ------------------------
+//style judul konten dan judul widget
+.page-title, .widget-title{
+    background: $primary;
+    margin-bottom: 20px;
+    padding: 15px;
+    color: #ffffff;
+}
+//bedakan judul widget pada footer
+.footer .widget-title{
+    border-bottom: 1px solid $primary;
+    background: none;
+    color: $primary;
+    padding: 0;
+}
+//ubah desain list group
+.list-group-item{
+    background: transparent;
+    border: 0;
+    border-bottom: 1px dotted rgba(0,0,0, 0.125);
+    padding-left: 0;
+}
+
+//-------- Mobile ---------
+@media (max-width: 767.98px) {
+    //agar pada mobile disembunyikan  dan dapat dibuka dengan tombol menu
+    .sidebar-widget {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        z-index: 1031;
+        background: #fff;
+        padding: 20px;
+        left: -100vw;
+        top: 0;
+    }
+    //menampilkan widget saat tombol menu diklik
+    .wrapper.open .sidebar-widget{
+        left: 0;
+        transition: 0.2s ease;
+    }
+}
